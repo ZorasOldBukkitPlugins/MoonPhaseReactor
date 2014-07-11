@@ -28,7 +28,7 @@ public abstract class MoonPhaseEvent extends Event
     private final MoonPhase moonPhase;
     private final World world;
     
-    public MoonPhaseEvent(MoonPhase moonPhase, World world)
+    protected MoonPhaseEvent(MoonPhase moonPhase, World world)
     {
         this.moonPhase = moonPhase;
         this.world = world;

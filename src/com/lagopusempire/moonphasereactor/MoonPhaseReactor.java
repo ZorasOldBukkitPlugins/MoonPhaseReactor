@@ -1,5 +1,6 @@
 package com.lagopusempire.moonphasereactor;
 
+import com.lagopusempire.moonphasereactor.events.MoonPhaseEventTriggerer;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**

@@ -15,7 +15,7 @@ import org.bukkit.World;
  */
 public class MoonPhasePeriodicEvent extends MoonPhaseEvent
 {
-    public MoonPhasePeriodicEvent(MoonPhase moonPhase, World world)
+    MoonPhasePeriodicEvent(MoonPhase moonPhase, World world)
     {
         super(moonPhase, world);
     }

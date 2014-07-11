@@ -4,10 +4,9 @@
  * and open the template in the editor.
  */
 
-package com.lagopusempire.moonphasereactor;
+package com.lagopusempire.moonphasereactor.events;
 
-import com.lagopusempire.moonphasereactor.events.MoonPhaseChangedEvent;
-import com.lagopusempire.moonphasereactor.events.MoonPhasePeriodicEvent;
+import com.lagopusempire.moonphasereactor.MoonPhase;
 import java.util.HashMap;
 import java.util.Map;
 import org.bukkit.Bukkit;
