@@ -15,5 +15,6 @@ commands:
             /<command> remove - turns on block removal selection
             /<command> [moon phase] [normal block] [special block] - turns on block selection
 permissions:
-    description: Allows one to use this plugin
-    default: op
+    mpblock.use:
+        description: Allows one to use this plugin
+        default: op
