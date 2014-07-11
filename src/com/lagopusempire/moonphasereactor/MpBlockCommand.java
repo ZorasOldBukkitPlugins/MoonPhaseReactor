@@ -40,6 +40,13 @@ public class MpBlockCommand implements CommandExecutor
                     player.sendMessage(ChatColor.GREEN + "Click a block to remove it.");
                     return true;
                 }
+                else if (args[0].equalsIgnoreCase("off"))
+                {
+                    metadataUtils.removeMetadata(player, "mpr_isRemoving");
+                    metadataUtils.setMetadata(player, "mpr_isSelecting", false);
+                    player.sendMessage(ChatColor.GREEN + "Selection mode disabled.");
+                    return true;
+                }
             }
             
             boolean isSelecting;

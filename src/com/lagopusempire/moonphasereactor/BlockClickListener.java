@@ -62,8 +62,6 @@ public class BlockClickListener implements Listener
                     event.getPlayer().sendMessage(ChatColor.GREEN + "Block removed!");
                 }
 
-                metadataUtils.removeMetadata(event.getPlayer(), "mpr_isRemoving");
-
                 return;
             }
             
