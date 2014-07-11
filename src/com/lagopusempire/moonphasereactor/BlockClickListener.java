@@ -42,7 +42,7 @@ public class BlockClickListener implements Listener
                 
                 String normalMaterialName = (String) metadataUtils.getMetadata(event.getPlayer(), "mpr_normalMaterial");
                 String specialMaterialName = (String) metadataUtils.getMetadata(event.getPlayer(), "mpr_specialMaterial");
-                String moonPhaseString = (String) metadataUtils.getMetadata(event.getPlayer(), "mpr_isSelecting");
+                String moonPhaseString = (String) metadataUtils.getMetadata(event.getPlayer(), "mpr_condition");
                 
                 if(normalMaterialName == null || specialMaterialName == null || moonPhaseString == null)
                 {

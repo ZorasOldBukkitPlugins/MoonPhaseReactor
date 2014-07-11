@@ -29,6 +29,8 @@ public class MoonPhaseReactor extends JavaPlugin
         getServer().getScheduler().runTaskTimer(this, new MoonPhaseEventTriggerer(), 0, MOON_PHASE_CHECK_INTERVAL);
         
         getCommand("mpblock").setExecutor(new MpBlockCommand(metadataUtils));
+        
+        getServer().getPluginManager().registerEvents(new BlockClickListener(metadataUtils, getDatabase()), this);
     }
     
     private void setupDatabase()
