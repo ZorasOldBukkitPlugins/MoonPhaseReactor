@@ -7,15 +7,16 @@
 package com.lagopusempire.moonphasereactor;
 
 import com.avaje.ebean.EbeanServer;
+
+import static com.lagopusempire.moonphasereactor.MetadataConstants.*;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-
-import static com.lagopusempire.moonphasereactor.MetadataConstants.*;
 
 /**
  *
@@ -39,9 +40,11 @@ public class BlockClickListener implements Listener
     {
         if(event.getAction() == Action.RIGHT_CLICK_BLOCK)
         {
+            Player player = event.getPlayer();
+            
             Block block = event.getClickedBlock();
                 
-            if(metadataUtils.getBoolean(event.getPlayer(), IS_REMOVING))
+            if(metadataUtils.getBoolean(player, IS_REMOVING))
             {
                 int x = block.getX();
                 int y = block.getY();
@@ -55,28 +58,28 @@ public class BlockClickListener implements Listener
 
                 if(data == null)
                 {
-                    event.getPlayer().sendMessage(ChatColor.RED + "That block is not registered!");
+                    player.sendMessage(ChatColor.RED + "That block is not registered!");
                 }
                 else
                 {
                     database.delete(data);
                     blockManager.removeBlock(data);
-                    event.getPlayer().sendMessage(ChatColor.GREEN + "Block removed!");
+                    player.sendMessage(ChatColor.GREEN + "Block removed!");
                 }
 
                 return;
             }
             
-            Boolean isSelecting = (Boolean) metadataUtils.getMetadata(event.getPlayer(), "mpr_isSelecting");
-            if(isSelecting != null && isSelecting)
+            boolean isSelecting = metadataUtils.getBoolean(player, IS_SELECTING);
+            if(isSelecting)
             {
-                String normalMaterialName = (String) metadataUtils.getMetadata(event.getPlayer(), "mpr_normalMaterial");
-                String specialMaterialName = (String) metadataUtils.getMetadata(event.getPlayer(), "mpr_specialMaterial");
-                String moonPhaseString = (String) metadataUtils.getMetadata(event.getPlayer(), "mpr_condition");
+                String normalMaterialName = (String) metadataUtils.getMetadata(player, NORMAL_MATERIAL);
+                String specialMaterialName = (String) metadataUtils.getMetadata(player, SPECIAL_MATERIAL);
+                String moonPhaseString = (String) metadataUtils.getMetadata(player, CONDITION);
                 
                 if(normalMaterialName == null || specialMaterialName == null || moonPhaseString == null)
                 {
-                    event.getPlayer().sendMessage(ChatColor.RED + "Internal server error! :(");
+                    player.sendMessage(ChatColor.RED + "Internal server error! :(");
                     return;
                 }
                 
@@ -91,17 +94,17 @@ public class BlockClickListener implements Listener
                 }
                 catch (Exception e)
                 {
-                    event.getPlayer().sendMessage(ChatColor.RED + "Invalid moon phase!");
+                    player.sendMessage(ChatColor.RED + "Invalid moon phase!");
                     return;
                 }
                 
                 if(normalMaterial == null)
                 {
-                    event.getPlayer().sendMessage(ChatColor.RED + "Your normal material is invalid!");
+                    player.sendMessage(ChatColor.RED + "Your normal material is invalid!");
                 }
                 else if (specialMaterial == null)
                 {
-                    event.getPlayer().sendMessage(ChatColor.RED + "Your speical material is invalid!");
+                    player.sendMessage(ChatColor.RED + "Your speical material is invalid!");
                 }
                 else
                 {
@@ -109,7 +112,7 @@ public class BlockClickListener implements Listener
                     data.setMoon_phase(moonPhase.ordinal());
                     data.setNormal_block(normalMaterial.toString());
                     data.setSpecial_block(specialMaterial.toString());
-                    data.setWorldName(event.getPlayer().getWorld().getName());
+                    data.setWorldName(player.getWorld().getName());
                     data.setX(block.getX());
                     data.setY(block.getY());
                     data.setZ(block.getZ());
@@ -117,7 +120,7 @@ public class BlockClickListener implements Listener
                     database.save(data);
                     blockManager.addBlock(data);
                     
-                    event.getPlayer().sendMessage(ChatColor.GREEN + "Block added.");
+                    player.sendMessage(ChatColor.GREEN + "Block added.");
                 }
             }
         }

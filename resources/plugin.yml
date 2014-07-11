@@ -9,6 +9,7 @@ commands:
     mpblock:
         description: base command
         permission: mpblock.use
+        aliases: [mpr]
         usage: |
             /<command> - shows this help
             /<command> off - toggle selection off
