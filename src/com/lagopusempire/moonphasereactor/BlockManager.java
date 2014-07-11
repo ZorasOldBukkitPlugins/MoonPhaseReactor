@@ -42,6 +42,8 @@ public class BlockManager implements Listener
     @EventHandler
     public void onMoonPhaseChange(MoonPhaseChangedEvent event)
     {
+        System.out.println("moon phase changed!: " + event.getMoonPhase());
+        
         for(BlockData data : blockData)
         {
             Block block = toBlock(data);
