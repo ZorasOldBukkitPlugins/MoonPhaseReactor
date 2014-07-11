@@ -14,7 +14,6 @@ public class MoonPhaseReactor extends JavaPlugin
 {
     private static final int MOON_PHASE_CHECK_INTERVAL = 20;//every 10 seconds
     
-    private PlayerManager playerManager;
     private BlockManager blockManager;
     
     @Override
@@ -22,13 +21,14 @@ public class MoonPhaseReactor extends JavaPlugin
     {
         setupDatabase();
         
-        playerManager = new PlayerManager();
-        getServer().getPluginManager().registerEvents(playerManager, this);
+        MetadataUtils metadataUtils = new MetadataUtils(this);
         
         blockManager = new BlockManager(getDatabase());
         getServer().getPluginManager().registerEvents(blockManager, this);
         
         getServer().getScheduler().runTaskTimer(this, new MoonPhaseEventTriggerer(), 0, MOON_PHASE_CHECK_INTERVAL);
+        
+        getCommand("mpblock").setExecutor(new MpBlockCommand(metadataUtils));
     }
     
     private void setupDatabase()
