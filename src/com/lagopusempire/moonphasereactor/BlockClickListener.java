@@ -15,6 +15,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import static com.lagopusempire.moonphasereactor.MetadataConstants.*;
+
 /**
  *
  * @author MrZoraman
@@ -39,7 +41,7 @@ public class BlockClickListener implements Listener
         {
             Block block = event.getClickedBlock();
                 
-            if(metadataUtils.getMetadata(event.getPlayer(), "mpr_isRemoving") != null)
+            if(metadataUtils.getBoolean(event.getPlayer(), IS_REMOVING))
             {
                 int x = block.getX();
                 int y = block.getY();

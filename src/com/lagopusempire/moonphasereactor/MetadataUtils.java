@@ -39,4 +39,24 @@ public class MetadataUtils
     {
         object.removeMetadata(key, plugin);
     }
+    
+    public void setBoolean(Metadatable object, String key, boolean value)
+    {
+        if(value)
+        {
+            object.setMetadata(key, new FixedMetadataValue(plugin, new Object()));
+        }
+        else
+        {
+            if(object.hasMetadata(key))
+            {
+                object.removeMetadata(key, plugin);
+            }
+        }
+    }
+    
+    public boolean getBoolean(Metadatable object, String key)
+    {
+        return object.hasMetadata(key);
+    }
 }

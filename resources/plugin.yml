@@ -10,7 +10,7 @@ commands:
         description: base command
         permission: mpblock.use
         usage: |
-            /<command> - toggle selection off
+            /<command> - shows this help
             /<command> off - toggle selection off
             /<command> remove - turns on block removal selection
             /<command> [moon phase] [normal block] [special block] - turns on block selection

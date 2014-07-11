@@ -12,6 +12,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static com.lagopusempire.moonphasereactor.MetadataConstants.*;
+
 /**
  *
  * @author MrZoraman
@@ -36,13 +38,13 @@ public class MpBlockCommand implements CommandExecutor
             {
                 if(args[0].equalsIgnoreCase("remove"))
                 {
-                    metadataUtils.setMetadata(player, "mpr_isRemoving", new Object());
+                    metadataUtils.setBoolean(player, IS_REMOVING, true);
                     player.sendMessage(ChatColor.GREEN + "Click a block to remove it.");
                     return true;
                 }
                 else if (args[0].equalsIgnoreCase("off"))
                 {
-                    metadataUtils.removeMetadata(player, "mpr_isRemoving");
+                    metadataUtils.setBoolean(player, IS_REMOVING, false);
                     metadataUtils.setMetadata(player, "mpr_isSelecting", false);
                     player.sendMessage(ChatColor.GREEN + "Selection mode disabled.");
                     return true;
