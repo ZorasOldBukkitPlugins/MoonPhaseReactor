@@ -80,4 +80,55 @@ public enum MoonPhase
                 return DAYTIME;
         }
     }
+    
+    public static MoonPhase matchMoonPhase(String input)
+    {
+        input = input.toLowerCase();
+        
+        switch(input)
+        {
+            case "fullmoon":
+            case "full_moon":
+                return FULL_MOON;
+            case "waninggibbous":
+            case "waning_gibbous":
+                return WANING_GIBBOUS;
+            case "lastquarter":
+            case "last_quarter":
+                return LAST_QUARTER;
+            case "wanincrescent":
+            case "waning_crescent":
+                return WANING_CRESCENT;
+            case "newmoon":
+            case "new_moon":
+                return NEW_MOON;
+            case "waxingcrescent":
+            case "waxing_crescent":
+                return WAXING_CRESCENT;
+            case "firstquarter":
+            case "first_quarter":
+                return FIRST_QUARTER;
+            case "waxinggibbous":
+            case "waxing_gibbous":
+                return WAXING_GIBBOUS;
+            case "daytime":
+            case "day":
+                return DAYTIME;
+            case "nomoon":
+            case "no_moon":
+                return NO_MOON;
+            case "cloudy":
+            case "clouds":
+            case "stormy":
+            case "storm":
+            case "raining":
+            case "rain":
+            case "snowing":
+            case "snow":
+            case "precipitation":
+                return CLOUDY;
+            default:
+                return null;
+        }
+    }
 }

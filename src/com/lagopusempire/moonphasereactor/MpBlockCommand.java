@@ -13,6 +13,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import static com.lagopusempire.moonphasereactor.MetadataConstants.*;
+import org.bukkit.Material;
 
 /**
  *
@@ -39,29 +40,21 @@ public class MpBlockCommand implements CommandExecutor
                 if(args[0].equalsIgnoreCase("remove"))
                 {
                     metadataUtils.setBoolean(player, IS_REMOVING, true);
-                    player.sendMessage(ChatColor.GREEN + "Click a block to remove it.");
+                    player.sendMessage(ChatColor.GREEN + "Right click blocks to remove them. Type " + ChatColor.YELLOW + "/" + alias + " off" + ChatColor.GREEN + " to stop.");
                     return true;
                 }
                 else if (args[0].equalsIgnoreCase("off"))
                 {
                     metadataUtils.setBoolean(player, IS_REMOVING, false);
-                    metadataUtils.setMetadata(player, "mpr_isSelecting", false);
+                    metadataUtils.setBoolean(player, IS_SELECTING, false);
                     player.sendMessage(ChatColor.GREEN + "Selection mode disabled.");
                     return true;
                 }
             }
             
-            boolean isSelecting;
+            boolean isSelecting = metadataUtils.getBoolean(player, IS_SELECTING);
             
-            Boolean isSelecting_obj = (Boolean) metadataUtils.getMetadata(player, "mpr_isSelecting");
-            if(isSelecting_obj == null)
-            {
-                isSelecting = true;//no questions. only tears.
-            }
-            else
-            {
-                isSelecting = !isSelecting_obj;
-            }
+            isSelecting = !isSelecting;
 
             if(isSelecting)
             {
@@ -72,22 +65,37 @@ public class MpBlockCommand implements CommandExecutor
                 }
                 else
                 {
-                    String condition = args[0];
-                    String normalMaterial = args[1];
-                    String specialMaterial = args[2];
+                    MoonPhase moonPhase = MoonPhase.matchMoonPhase(args[0]);
+                    Material normalMaterial = Material.matchMaterial(args[1]);
+                    Material specialMaterial = Material.matchMaterial(args[2]);
                     
-                    metadataUtils.setMetadata(player, "mpr_condition", condition);
-                    metadataUtils.setMetadata(player, "mpr_normalMaterial", normalMaterial);
-                    metadataUtils.setMetadata(player, "mpr_specialMaterial", specialMaterial);
-                    
-                    player.sendMessage(ChatColor.GREEN + "Please select a block.");
-                    metadataUtils.setMetadata(player, "mpr_isSelecting", true);
+                    if(moonPhase == null)
+                    {
+                        player.sendMessage(ChatColor.RED + "Invalid moon phase!");
+                    }
+                    else if(normalMaterial == null)
+                    {
+                        player.sendMessage(ChatColor.RED + "Invalid normal material!");
+                    }
+                    else if(specialMaterial == null)
+                    {
+                        player.sendMessage(ChatColor.RED + "Invlaid special material!");
+                    }
+                    else
+                    {
+                        metadataUtils.setMetadata(player, CONDITION, moonPhase);
+                        metadataUtils.setMetadata(player, NORMAL_MATERIAL, normalMaterial);
+                        metadataUtils.setMetadata(player, SPECIAL_MATERIAL, specialMaterial);
+
+                        player.sendMessage(ChatColor.GREEN + "Please select a block. To end selection mode, type " + ChatColor.YELLOW + "/" + alias + " off" + ChatColor.GREEN + ".");
+                        metadataUtils.setBoolean(player, IS_SELECTING, true);
+                    }
                 }
             }
             else
             {
-                player.sendMessage(ChatColor.GREEN + "No longer selecting a block");
-                metadataUtils.setMetadata(player, "mpr_isSelecting", false);
+                player.sendMessage(ChatColor.RED + "You're already in selection mode! To end selection mode, type " + ChatColor.YELLOW + "/" + alias + " off" + ChatColor.RED + ".");
+                return true;
             }
         }
         else
