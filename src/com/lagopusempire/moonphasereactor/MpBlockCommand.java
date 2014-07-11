@@ -32,6 +32,16 @@ public class MpBlockCommand implements CommandExecutor
         {
             Player player = (Player) sender;
             
+            if(args.length > 0)
+            {
+                if(args[0].equalsIgnoreCase("remove"))
+                {
+                    metadataUtils.setMetadata(player, "mpr_isRemoving", new Object());
+                    player.sendMessage(ChatColor.GREEN + "Click a block to remove it.");
+                    return true;
+                }
+            }
+            
             boolean isSelecting;
             
             Boolean isSelecting_obj = (Boolean) metadataUtils.getMetadata(player, "mpr_isSelecting");

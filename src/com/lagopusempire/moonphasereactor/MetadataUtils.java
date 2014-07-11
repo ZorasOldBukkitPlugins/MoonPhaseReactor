@@ -34,4 +34,9 @@ public class MetadataUtils
 
         return null;
     }
+    
+    public void removeMetadata(Metadatable object, String key)
+    {
+        object.removeMetadata(key, plugin);
+    }
 }

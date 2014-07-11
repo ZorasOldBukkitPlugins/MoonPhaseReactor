@@ -34,6 +34,11 @@ public class BlockManager implements Listener
         blockData.add(data);
     }
     
+    public void removeBlock(BlockData data)
+    {
+        blockData.remove(data);
+    }
+    
     @EventHandler
     public void onMoonPhaseChange(MoonPhaseChangedEvent event)
     {

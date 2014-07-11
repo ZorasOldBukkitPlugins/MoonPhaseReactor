@@ -42,6 +42,34 @@ public class BlockClickListener implements Listener
             {
                 Block block = event.getClickedBlock();
                 
+                if(metadataUtils.getMetadata(event.getPlayer(), "mpr_isRemoving") != null)
+                {
+                    int x = block.getX();
+                    int y = block.getY();
+                    int z = block.getZ();
+                    
+                    BlockData data = database.find(BlockData.class).where()
+                            .ieq("x", String.valueOf(x))
+                            .ieq("y", String.valueOf(y))
+                            .ieq("z", String.valueOf(z))
+                            .findUnique();
+                    
+                    if(data == null)
+                    {
+                        event.getPlayer().sendMessage(ChatColor.RED + "That block is not registered!");
+                    }
+                    else
+                    {
+                        database.delete(data);
+                        blockManager.removeBlock(data);
+                        event.getPlayer().sendMessage(ChatColor.GREEN + "Block removed!");
+                    }
+                    
+                    metadataUtils.removeMetadata(event.getPlayer(), "mpr_isRemoving");
+                    
+                    return;
+                }
+                
                 String normalMaterialName = (String) metadataUtils.getMetadata(event.getPlayer(), "mpr_normalMaterial");
                 String specialMaterialName = (String) metadataUtils.getMetadata(event.getPlayer(), "mpr_specialMaterial");
                 String moonPhaseString = (String) metadataUtils.getMetadata(event.getPlayer(), "mpr_condition");
