@@ -12,9 +12,9 @@ commands:
         aliases: [mpr]
         usage: |
             /<command> - shows this help
-            /<command> off - toggle selection off
-            /<command> remove - turns on block removal selection
-            /<command> [moon phase] [normal block] [special block] - turns on block selection
+            /<command> off - turns selection mode off
+            /<command> remove - turns on block removal selection mode
+            /<command> [moon phase] [normal block] [special block] - turns on block selection mode
 permissions:
     mpblock.use:
         description: Allows one to use this plugin

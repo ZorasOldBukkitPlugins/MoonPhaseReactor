@@ -43,12 +43,13 @@ public class BlockClickListener implements Listener
             Player player = event.getPlayer();
             
             Block block = event.getClickedBlock();
+            
+            int x = block.getX();
+            int y = block.getY();
+            int z = block.getZ();
                 
             if(metadataUtils.getBoolean(player, IS_REMOVING))
             {
-                int x = block.getX();
-                int y = block.getY();
-                int z = block.getZ();
 
                 BlockData data = database.find(BlockData.class).where()
                         .ieq("x", String.valueOf(x))
@@ -83,19 +84,32 @@ public class BlockClickListener implements Listener
                     return;
                 }
                 
-                BlockData data = new BlockData();
-                data.setMoon_phase(moonPhase.ordinal());
-                data.setNormal_block(normalMaterial.toString());
-                data.setSpecial_block(specialMaterial.toString());
-                data.setWorldName(player.getWorld().getName());
-                data.setX(block.getX());
-                data.setY(block.getY());
-                data.setZ(block.getZ());
+                BlockData data = database.find(BlockData.class).where()
+                        .ieq("x", String.valueOf(x))
+                        .ieq("y", String.valueOf(y))
+                        .ieq("z", String.valueOf(z))
+                        .findUnique();
+                
+                if(data == null)
+                {
+                    data = new BlockData();
+                    data.setMoon_phase(moonPhase.ordinal());
+                    data.setNormal_block(normalMaterial.toString());
+                    data.setSpecial_block(specialMaterial.toString());
+                    data.setWorldName(player.getWorld().getName());
+                    data.setX(block.getX());
+                    data.setY(block.getY());
+                    data.setZ(block.getZ());
 
-                database.save(data);
-                blockManager.addBlock(data);
+                    database.save(data);
+                    blockManager.addBlock(data);
 
-                player.sendMessage(ChatColor.GREEN + "Block added.");
+                    player.sendMessage(ChatColor.GREEN + "Block added.");
+                }
+                else
+                {
+                    player.sendMessage(ChatColor.RED + "That block is already registered! To unregister it, type " + ChatColor.YELLOW + "/mpr remove " + ChatColor.RED + ".");
+                }
             }
         }
     }

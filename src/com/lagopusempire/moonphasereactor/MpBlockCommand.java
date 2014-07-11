@@ -40,6 +40,7 @@ public class MpBlockCommand implements CommandExecutor
                 if(args[0].equalsIgnoreCase("remove"))
                 {
                     metadataUtils.setBoolean(player, IS_REMOVING, true);
+                    metadataUtils.setBoolean(player, IS_SELECTING, false);
                     player.sendMessage(ChatColor.GREEN + "Right click blocks to remove them. Type " + ChatColor.YELLOW + "/" + alias + " off" + ChatColor.GREEN + " to stop.");
                     return true;
                 }
@@ -89,6 +90,7 @@ public class MpBlockCommand implements CommandExecutor
 
                         player.sendMessage(ChatColor.GREEN + "Please select a block. To end selection mode, type " + ChatColor.YELLOW + "/" + alias + " off" + ChatColor.GREEN + ".");
                         metadataUtils.setBoolean(player, IS_SELECTING, true);
+                        metadataUtils.setBoolean(player, IS_REMOVING, false);
                     }
                 }
             }

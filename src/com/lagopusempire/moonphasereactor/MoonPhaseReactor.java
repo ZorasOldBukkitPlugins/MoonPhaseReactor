@@ -12,7 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class MoonPhaseReactor extends JavaPlugin
 {
-    private static final int MOON_PHASE_CHECK_INTERVAL = 20;//every 10 seconds
+    private static final int MOON_PHASE_CHECK_INTERVAL = 20;
     
     @Override
     public void onEnable()
