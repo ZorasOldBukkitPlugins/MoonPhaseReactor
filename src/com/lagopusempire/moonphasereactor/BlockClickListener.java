@@ -73,55 +73,29 @@ public class BlockClickListener implements Listener
             boolean isSelecting = metadataUtils.getBoolean(player, IS_SELECTING);
             if(isSelecting)
             {
-                String normalMaterialName = (String) metadataUtils.getMetadata(player, NORMAL_MATERIAL);
-                String specialMaterialName = (String) metadataUtils.getMetadata(player, SPECIAL_MATERIAL);
-                String moonPhaseString = (String) metadataUtils.getMetadata(player, CONDITION);
+                Material normalMaterial = (Material) metadataUtils.getMetadata(player, NORMAL_MATERIAL);
+                Material specialMaterial = (Material) metadataUtils.getMetadata(player, SPECIAL_MATERIAL);
+                MoonPhase moonPhase = (MoonPhase) metadataUtils.getMetadata(player, CONDITION);
                 
-                if(normalMaterialName == null || specialMaterialName == null || moonPhaseString == null)
+                if(normalMaterial == null || specialMaterial == null || moonPhase == null)
                 {
                     player.sendMessage(ChatColor.RED + "Internal server error! :(");
                     return;
                 }
                 
-                Material normalMaterial = Material.matchMaterial(normalMaterialName);
-                Material specialMaterial = Material.matchMaterial(specialMaterialName);
-                
-                MoonPhase moonPhase = null;
-                
-                try
-                {
-                    moonPhase = MoonPhase.valueOf(moonPhaseString);
-                }
-                catch (Exception e)
-                {
-                    player.sendMessage(ChatColor.RED + "Invalid moon phase!");
-                    return;
-                }
-                
-                if(normalMaterial == null)
-                {
-                    player.sendMessage(ChatColor.RED + "Your normal material is invalid!");
-                }
-                else if (specialMaterial == null)
-                {
-                    player.sendMessage(ChatColor.RED + "Your speical material is invalid!");
-                }
-                else
-                {
-                    BlockData data = new BlockData();
-                    data.setMoon_phase(moonPhase.ordinal());
-                    data.setNormal_block(normalMaterial.toString());
-                    data.setSpecial_block(specialMaterial.toString());
-                    data.setWorldName(player.getWorld().getName());
-                    data.setX(block.getX());
-                    data.setY(block.getY());
-                    data.setZ(block.getZ());
-                    
-                    database.save(data);
-                    blockManager.addBlock(data);
-                    
-                    player.sendMessage(ChatColor.GREEN + "Block added.");
-                }
+                BlockData data = new BlockData();
+                data.setMoon_phase(moonPhase.ordinal());
+                data.setNormal_block(normalMaterial.toString());
+                data.setSpecial_block(specialMaterial.toString());
+                data.setWorldName(player.getWorld().getName());
+                data.setX(block.getX());
+                data.setY(block.getY());
+                data.setZ(block.getZ());
+
+                database.save(data);
+                blockManager.addBlock(data);
+
+                player.sendMessage(ChatColor.GREEN + "Block added.");
             }
         }
     }
