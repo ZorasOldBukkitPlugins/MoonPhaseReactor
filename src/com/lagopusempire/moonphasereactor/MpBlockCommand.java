@@ -37,7 +37,7 @@ public class MpBlockCommand implements CommandExecutor
             Boolean isSelecting_obj = (Boolean) metadataUtils.getMetadata(player, "mpr_isSelecting");
             if(isSelecting_obj == null)
             {
-                isSelecting = false;
+                isSelecting = true;//no questions. only tears.
             }
             else
             {

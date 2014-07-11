@@ -1,4 +1,6 @@
 name: MoonPhaseReactor
-version: 0.0.4
+version: 0.0.7
 main: com.lagopusempire.moonphasereactor.MoonPhaseReactor
 database: true
+commands:
+    mpblock:
