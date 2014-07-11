@@ -89,33 +89,42 @@ public enum MoonPhase
         {
             case "fullmoon":
             case "full_moon":
+            case "full-moon":
                 return FULL_MOON;
             case "waninggibbous":
             case "waning_gibbous":
+            case "waning-gibbous":
                 return WANING_GIBBOUS;
             case "lastquarter":
             case "last_quarter":
+            case "last-quarter":
                 return LAST_QUARTER;
             case "wanincrescent":
             case "waning_crescent":
+            case "waning-crescent":
                 return WANING_CRESCENT;
             case "newmoon":
             case "new_moon":
+            case "new-moon":
                 return NEW_MOON;
             case "waxingcrescent":
             case "waxing_crescent":
+            case "waxing-crescent":
                 return WAXING_CRESCENT;
             case "firstquarter":
             case "first_quarter":
+            case "first-quarter":
                 return FIRST_QUARTER;
             case "waxinggibbous":
             case "waxing_gibbous":
+            case "waxing-gibbous":
                 return WAXING_GIBBOUS;
             case "daytime":
             case "day":
                 return DAYTIME;
             case "nomoon":
             case "no_moon":
+            case "no-moon":
                 return NO_MOON;
             case "cloudy":
             case "clouds":

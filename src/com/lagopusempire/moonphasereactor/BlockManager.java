@@ -8,6 +8,7 @@ package com.lagopusempire.moonphasereactor;
 
 import com.avaje.ebean.EbeanServer;
 import com.lagopusempire.moonphasereactor.events.MoonPhaseChangedEvent;
+import java.util.HashSet;
 import java.util.Set;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -18,15 +19,20 @@ import org.bukkit.event.Listener;
 
 /**
  *
- * @author Mr
+ * @author MrZoraman
  */
 public class BlockManager implements Listener
 {
-    private final Set<BlockData> blockData;
+    private Set<BlockData> blockData;
     
     public BlockManager(EbeanServer database)
     {
         blockData = database.find(BlockData.class).findSet();
+        
+        if(blockData == null)
+        {
+            blockData = new HashSet<>();
+        }
     }
     
     public void addBlock(BlockData data)
