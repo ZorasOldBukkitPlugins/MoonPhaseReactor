@@ -23,11 +23,13 @@ public class BlockClickListener implements Listener
 {
     private final MetadataUtils metadataUtils;
     private final EbeanServer database;
+    private final BlockManager blockManager;
     
-    public BlockClickListener(MetadataUtils metadataUtils, EbeanServer database)
+    public BlockClickListener(MetadataUtils metadataUtils, EbeanServer database, BlockManager blockManager)
     {
         this.metadataUtils = metadataUtils;
         this.database = database;
+        this.blockManager = blockManager;
     }
     
     @EventHandler
@@ -85,6 +87,7 @@ public class BlockClickListener implements Listener
                     data.setZ(block.getZ());
                     
                     database.save(data);
+                    blockManager.addBlock(data);
                     
                     event.getPlayer().sendMessage(ChatColor.GREEN + "Block added.");
                 }

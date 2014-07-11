@@ -29,6 +29,11 @@ public class BlockManager implements Listener
         blockData = database.find(BlockData.class).findSet();
     }
     
+    public void addBlock(BlockData data)
+    {
+        blockData.add(data);
+    }
+    
     @EventHandler
     public void onMoonPhaseChange(MoonPhaseChangedEvent event)
     {
