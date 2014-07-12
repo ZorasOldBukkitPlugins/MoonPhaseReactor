@@ -122,7 +122,7 @@ public class MpBlockCommand implements CommandExecutor
                     Material normalMaterial = Material.matchMaterial(args[1]);
                     Material specialMaterial = Material.matchMaterial(args[2]);
                     
-                    if(moonPhase == null)
+                    if(!inferringMoon && moonPhase == null)
                     {
                         player.sendMessage(ChatColor.RED + "Invalid moon phase!");
                     }
