@@ -5,6 +5,7 @@ author: MrZoraman
 main: ${project.groupId}.MoonPhaseReactor
 database: true
 prefix: MPR
+website: http://dev.bukkit.org/bukkit-plugins/moonphasereactor/
 commands:
     mpblock:
         description: base command
