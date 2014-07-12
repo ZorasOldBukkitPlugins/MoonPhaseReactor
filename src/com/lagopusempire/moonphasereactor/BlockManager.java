@@ -9,6 +9,7 @@ package com.lagopusempire.moonphasereactor;
 import com.avaje.ebean.EbeanServer;
 import com.lagopusempire.moonphasereactor.events.MoonPhaseChangedEvent;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -42,7 +43,19 @@ public class BlockManager implements Listener
     
     public void removeBlock(BlockData data)
     {
-        blockData.remove(data);
+        Iterator<BlockData> it = blockData.iterator();
+        while(it.hasNext())
+        {
+            BlockData bd = it.next();
+            if(bd.getX() == data.getX()
+                    && bd.getY() == data.getX()
+                    && bd.getZ() == data.getZ()
+                    && bd.getWorldName().equals(data.getWorldName()))
+            {
+                System.out.println("removing");
+                it.remove();
+            }
+        }
     }
     
     @EventHandler

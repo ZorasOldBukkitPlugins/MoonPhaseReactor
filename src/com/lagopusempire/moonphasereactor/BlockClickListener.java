@@ -64,6 +64,7 @@ public class BlockClickListener implements Listener
                             .ieq("x", String.valueOf(x))
                             .ieq("y", String.valueOf(y))
                             .ieq("z", String.valueOf(z))
+                            .ieq("worldName", player.getWorld().getName())
                             .findUnique();
                         
                         Bukkit.getScheduler().runTask(plugin, new Runnable()
@@ -130,6 +131,7 @@ public class BlockClickListener implements Listener
                             .ieq("x", String.valueOf(x))
                             .ieq("y", String.valueOf(y))
                             .ieq("z", String.valueOf(z))
+                            .ieq("worldName", player.getWorld().getName())
                             .findUnique();
                         
                         Bukkit.getScheduler().runTask(plugin, new Runnable()
