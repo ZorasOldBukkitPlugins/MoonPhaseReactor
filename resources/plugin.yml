@@ -1,8 +1,8 @@
-name: MoonPhaseReactor
-version: 1.1.0
-description: Have the moon have a direct impact on the how the world looks!
+name: ${project.artifactId}
+version: ${project.version}
+description: ${project.description}
 author: MrZoraman
-main: com.lagopusempire.moonphasereactor.MoonPhaseReactor
+main: ${project.groupId}.MoonPhaseReactor
 database: true
 prefix: MPR
 commands:
@@ -12,10 +12,10 @@ commands:
         aliases: [mpr]
         usage: |
             /<command> - shows this help
-            /<command> off - turns selection mode off
-            /<command> remove - turns on block removal selection mode
             /<command> [moon phase] [normal block] [special block] - turns on block selection mode
+            /<command> remove - turns on block removal selection mode
+            /<command> off - turns selection mode off
 permissions:
     mpblock.use:
-        description: Allows one to use this plugin
+        description: Allows use of this plugin
         default: op

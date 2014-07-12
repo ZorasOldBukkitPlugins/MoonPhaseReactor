@@ -4,9 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     
-    <groupId>com.lagopusempire</groupId>
+    <groupId>com.lagopusempire.moonphasereactor</groupId>
     <artifactId>MoonPhaseReactor</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.1</version>
+    <description>Bukkit plugin that lets the state of the moon have an impact on worlds</description>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -28,6 +30,7 @@
     
     <build>
         <sourceDirectory>src/</sourceDirectory>
+        <finalName>${project.artifactId}</finalName>
         <resources>
             <resource>
                 <directory>resources/</directory>
@@ -35,6 +38,7 @@
                 <includes>
                     <include>plugin.yml</include>
                     <include>config.yml</include>
+                    <include>LICENSE</include>
                 </includes>
             </resource>
         </resources>
@@ -50,4 +54,13 @@
             </plugin>
         </plugins>
     </build>
+    
+    <licenses>
+        <license>
+            <name>New BSD</name>
+            <url>http://choosealicense.com/licenses/bsd-3-clause/</url>
+            <distribution>repo</distribution>
+            <comments>Open source license</comments>
+        </license>
+    </licenses>
 </project>
