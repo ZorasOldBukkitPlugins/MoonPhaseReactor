@@ -8,7 +8,7 @@ package com.lagopusempire.moonphasereactor;
 
 /**
  *
- * @author Mr
+ * @author MrZoraman
  */
 public class MetadataConstants
 {
@@ -17,5 +17,6 @@ public class MetadataConstants
     public static final String NORMAL_MATERIAL = "mpr_normalMaterial";
     public static final String SPECIAL_MATERIAL = "mpr_specialMaterial";
     public static final String CONDITION = "mpr_condition";
-    public static final String INFERRING = "mpr_inferring";
+    public static final String INFERRING_NORMAL = "mpr_inferringNormal";
+    public static final String INFERRING_SPECIAL = "mpr_inferringSpecial";
 }

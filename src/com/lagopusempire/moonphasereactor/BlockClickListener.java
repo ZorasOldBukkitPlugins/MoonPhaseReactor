@@ -112,22 +112,31 @@ public class BlockClickListener implements Listener
             boolean isSelecting = metadataUtils.getBoolean(player, IS_SELECTING);
             if(isSelecting)
             {
-                boolean inferring = metadataUtils.getBoolean(player, INFERRING);
+                Material normal_material;
                 
-                Material material;
-                
-                if(!inferring)
+                if(metadataUtils.getBoolean(player, INFERRING_NORMAL))
                 {
-                    material = (Material) metadataUtils.getMetadata(player, NORMAL_MATERIAL);
+                    normal_material = block.getType();
                 }
                 else
                 {
-                    material = block.getType();
+                    normal_material = (Material) metadataUtils.getMetadata(player, NORMAL_MATERIAL);
                 }
                 
-                final Material normalMaterial = material;
+                Material special_material;
                 
-                final Material specialMaterial = (Material) metadataUtils.getMetadata(player, SPECIAL_MATERIAL);
+                if(metadataUtils.getBoolean(player, INFERRING_SPECIAL))
+                {
+                    special_material = block.getType();
+                }
+                else
+                {
+                    special_material = (Material) metadataUtils.getMetadata(player, SPECIAL_MATERIAL);
+                }
+                
+                final Material normalMaterial = normal_material;
+                final Material specialMaterial = special_material;
+                
                 final MoonPhase moonPhase = (MoonPhase) metadataUtils.getMetadata(player, CONDITION);
                 
                 if(normalMaterial == null || specialMaterial == null || moonPhase == null)

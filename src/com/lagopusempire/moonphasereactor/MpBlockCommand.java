@@ -66,20 +66,41 @@ public class MpBlockCommand implements CommandExecutor
                 }
                 else
                 {
-                    boolean inferring = false;
+                    boolean inferringNormal = false;
+                    boolean inferringSpecial = false;
                     
                     if(args[1].equalsIgnoreCase("infer"))
                     {
-                        inferring = true;
+                        inferringNormal = true;
                     }
                     
-                    if(inferring)
+                    if(args[2].equalsIgnoreCase("infer"))
                     {
-                        metadataUtils.setBoolean(player, INFERRING, true);
+                        inferringSpecial = true;
+                    }
+                    
+                    if(inferringNormal && inferringSpecial)
+                    {
+                        player.sendMessage(ChatColor.RED + "You can't infer both the normal and special material!");
+                        return true;
+                    }
+                    
+                    if(inferringNormal)
+                    {
+                        metadataUtils.setBoolean(player, INFERRING_NORMAL, true);
                     }
                     else
                     {
-                        metadataUtils.setBoolean(player, INFERRING, false);
+                        metadataUtils.setBoolean(player, INFERRING_NORMAL, false);
+                    }
+                    
+                    if(inferringSpecial)
+                    {
+                        metadataUtils.setBoolean(player, INFERRING_SPECIAL, true);
+                    }
+                    else
+                    {
+                        metadataUtils.setBoolean(player, INFERRING_SPECIAL, false);
                     }
                     
                     MoonPhase moonPhase = MoonPhase.matchMoonPhase(args[0]);
@@ -90,11 +111,11 @@ public class MpBlockCommand implements CommandExecutor
                     {
                         player.sendMessage(ChatColor.RED + "Invalid moon phase!");
                     }
-                    else if(!inferring && normalMaterial == null)
+                    else if(!inferringNormal && normalMaterial == null)
                     {
                         player.sendMessage(ChatColor.RED + "Invalid normal material!");
                     }
-                    else if(specialMaterial == null)
+                    else if(!inferringSpecial && specialMaterial == null)
                     {
                         player.sendMessage(ChatColor.RED + "Invlaid special material!");
                     }
