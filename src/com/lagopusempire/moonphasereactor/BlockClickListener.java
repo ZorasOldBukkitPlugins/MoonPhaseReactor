@@ -15,6 +15,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -39,7 +40,7 @@ public class BlockClickListener implements Listener
         this.plugin = plugin;
     }
     
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerInteract(PlayerInteractEvent event)
     {
         if(event.getAction() == Action.RIGHT_CLICK_BLOCK)
@@ -111,7 +112,21 @@ public class BlockClickListener implements Listener
             boolean isSelecting = metadataUtils.getBoolean(player, IS_SELECTING);
             if(isSelecting)
             {
-                final Material normalMaterial = (Material) metadataUtils.getMetadata(player, NORMAL_MATERIAL);
+                boolean inferring = metadataUtils.getBoolean(player, INFERRING);
+                
+                Material material;
+                
+                if(inferring)
+                {
+                    material = (Material) metadataUtils.getMetadata(player, NORMAL_MATERIAL);
+                }
+                else
+                {
+                    material = block.getType();
+                }
+                
+                final Material normalMaterial = material;
+                
                 final Material specialMaterial = (Material) metadataUtils.getMetadata(player, SPECIAL_MATERIAL);
                 final MoonPhase moonPhase = (MoonPhase) metadataUtils.getMetadata(player, CONDITION);
                 
@@ -120,6 +135,7 @@ public class BlockClickListener implements Listener
                     player.sendMessage(ChatColor.RED + "Internal server error! :(");
                     return;
                 }
+                
                 
                 Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() 
                 {

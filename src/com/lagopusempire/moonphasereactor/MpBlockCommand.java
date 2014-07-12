@@ -44,7 +44,7 @@ public class MpBlockCommand implements CommandExecutor
                     player.sendMessage(ChatColor.GREEN + "Right click blocks to remove them. Type " + ChatColor.YELLOW + "/" + alias + " off" + ChatColor.GREEN + " to stop.");
                     return true;
                 }
-                else if (args[0].equalsIgnoreCase("off"))
+                else if (args[0].equalsIgnoreCase("off") || args[0].equalsIgnoreCase("done"))
                 {
                     metadataUtils.setBoolean(player, IS_REMOVING, false);
                     metadataUtils.setBoolean(player, IS_SELECTING, false);
@@ -66,6 +66,22 @@ public class MpBlockCommand implements CommandExecutor
                 }
                 else
                 {
+                    boolean inferring = false;
+                    
+                    if(args[1].equalsIgnoreCase("infer"))
+                    {
+                        inferring = true;
+                    }
+                    
+                    if(inferring)
+                    {
+                        metadataUtils.setBoolean(player, INFERRING, true);
+                    }
+                    else
+                    {
+                        metadataUtils.setBoolean(player, INFERRING, false);
+                    }
+                    
                     MoonPhase moonPhase = MoonPhase.matchMoonPhase(args[0]);
                     Material normalMaterial = Material.matchMaterial(args[1]);
                     Material specialMaterial = Material.matchMaterial(args[2]);
@@ -74,7 +90,7 @@ public class MpBlockCommand implements CommandExecutor
                     {
                         player.sendMessage(ChatColor.RED + "Invalid moon phase!");
                     }
-                    else if(normalMaterial == null)
+                    else if(!inferring && normalMaterial == null)
                     {
                         player.sendMessage(ChatColor.RED + "Invalid normal material!");
                     }

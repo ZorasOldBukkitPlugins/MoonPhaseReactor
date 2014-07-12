@@ -17,4 +17,5 @@ public class MetadataConstants
     public static final String NORMAL_MATERIAL = "mpr_normalMaterial";
     public static final String SPECIAL_MATERIAL = "mpr_specialMaterial";
     public static final String CONDITION = "mpr_condition";
+    public static final String INFERRING = "mpr_inferring";
 }
