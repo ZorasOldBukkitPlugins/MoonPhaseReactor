@@ -66,8 +66,14 @@ public class MpBlockCommand implements CommandExecutor
                 }
                 else
                 {
+                    boolean inferringMoon = false;
                     boolean inferringNormal = false;
                     boolean inferringSpecial = false;
+                    
+                    if(args[0].equalsIgnoreCase("infer"))
+                    {
+                        inferringMoon = true;
+                    }
                     
                     if(args[1].equalsIgnoreCase("infer"))
                     {
@@ -83,6 +89,15 @@ public class MpBlockCommand implements CommandExecutor
                     {
                         player.sendMessage(ChatColor.RED + "You can't infer both the normal and special material!");
                         return true;
+                    }
+                    
+                    if(inferringMoon)
+                    {
+                        metadataUtils.setBoolean(player, INFERRING_MOON, true);
+                    }
+                    else
+                    {
+                        metadataUtils.setBoolean(player, INFERRING_MOON, false);
                     }
                     
                     if(inferringNormal)

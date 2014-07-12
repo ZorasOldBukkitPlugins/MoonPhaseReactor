@@ -134,17 +134,27 @@ public class BlockClickListener implements Listener
                     special_material = (Material) metadataUtils.getMetadata(player, SPECIAL_MATERIAL);
                 }
                 
+                MoonPhase moon_phase;
+                
+                if(metadataUtils.getBoolean(player, INFERRING_MOON))
+                {
+                    moon_phase = MoonPhase.getMoonPhase(block.getWorld());
+                }
+                else
+                {
+                    moon_phase = (MoonPhase) metadataUtils.getMetadata(player, CONDITION);
+                }
+                
                 final Material normalMaterial = normal_material;
                 final Material specialMaterial = special_material;
                 
-                final MoonPhase moonPhase = (MoonPhase) metadataUtils.getMetadata(player, CONDITION);
+                final MoonPhase moonPhase = moon_phase;
                 
                 if(normalMaterial == null || specialMaterial == null || moonPhase == null)
                 {
                     player.sendMessage(ChatColor.RED + "Internal server error! :(");
                     return;
                 }
-                
                 
                 Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() 
                 {

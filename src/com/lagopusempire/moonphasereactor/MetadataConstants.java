@@ -19,4 +19,5 @@ public class MetadataConstants
     public static final String CONDITION = "mpr_condition";
     public static final String INFERRING_NORMAL = "mpr_inferringNormal";
     public static final String INFERRING_SPECIAL = "mpr_inferringSpecial";
+    public static final String INFERRING_MOON = "mpr_inferringMoon";
 }
