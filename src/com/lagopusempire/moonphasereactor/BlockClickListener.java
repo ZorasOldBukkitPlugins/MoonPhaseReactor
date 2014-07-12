@@ -134,32 +134,30 @@ public class BlockClickListener implements Listener
                             .ieq("worldName", player.getWorld().getName())
                             .findUnique();
                         
+                        if(data != null)
+                        {
+                            database.delete(data);
+                        }
+                        
                         Bukkit.getScheduler().runTask(plugin, new Runnable()
                         {
                             @Override
                             public void run()
                             {
                                 //SYNC
-                                if(data == null)
-                                {
-                                    BlockData blockData = new BlockData();
-                                    blockData.setMoon_phase(moonPhase.ordinal());
-                                    blockData.setNormal_block(normalMaterial.toString());
-                                    blockData.setSpecial_block(specialMaterial.toString());
-                                    blockData.setWorldName(player.getWorld().getName());
-                                    blockData.setX(block.getX());
-                                    blockData.setY(block.getY());
-                                    blockData.setZ(block.getZ());
+                                BlockData blockData = new BlockData();
+                                blockData.setMoon_phase(moonPhase.ordinal());
+                                blockData.setNormal_block(normalMaterial.toString());
+                                blockData.setSpecial_block(specialMaterial.toString());
+                                blockData.setWorldName(player.getWorld().getName());
+                                blockData.setX(block.getX());
+                                blockData.setY(block.getY());
+                                blockData.setZ(block.getZ());
 
-                                    database.save(blockData);
-                                    blockManager.addBlock(blockData);
+                                database.save(blockData);
+                                blockManager.addBlock(blockData);
 
-                                    player.sendMessage(ChatColor.GREEN + "Block added.");
-                                }
-                                else
-                                {
-                                    player.sendMessage(ChatColor.RED + "That block is already registered! To unregister it, type " + ChatColor.YELLOW + "/mpr remove " + ChatColor.RED + ".");
-                                }
+                                player.sendMessage(ChatColor.GREEN + "Block added.");
                             }//
                         });//END SYNC
                     }//

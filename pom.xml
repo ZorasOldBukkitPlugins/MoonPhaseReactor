@@ -6,7 +6,7 @@
     
     <groupId>com.lagopusempire.moonphasereactor</groupId>
     <artifactId>MoonPhaseReactor</artifactId>
-    <version>1.2.2</version>
+    <version>1.2.3</version>
     <description>Bukkit plugin that lets the state of the moon have an impact on worlds</description>
     
     <properties>
