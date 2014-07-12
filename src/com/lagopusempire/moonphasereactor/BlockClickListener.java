@@ -116,7 +116,7 @@ public class BlockClickListener implements Listener
                 
                 Material material;
                 
-                if(inferring)
+                if(!inferring)
                 {
                     material = (Material) metadataUtils.getMetadata(player, NORMAL_MATERIAL);
                 }
