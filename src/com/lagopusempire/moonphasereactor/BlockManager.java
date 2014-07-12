@@ -43,7 +43,6 @@ public class BlockManager implements Listener
     
     public void removeBlock(BlockData data)
     {
-        System.out.println("size: " + blockData.size());
         Iterator<BlockData> it = blockData.iterator();
         while(it.hasNext())
         {
@@ -53,7 +52,6 @@ public class BlockManager implements Listener
                     && bd.getZ() == data.getZ()
                     && bd.getWorldName().equals(data.getWorldName()))
             {
-                System.out.println("removing");
                 it.remove();
             }
         }
