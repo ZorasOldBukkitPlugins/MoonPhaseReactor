@@ -43,12 +43,13 @@ public class BlockManager implements Listener
     
     public void removeBlock(BlockData data)
     {
+        System.out.println("size: " + blockData.size());
         Iterator<BlockData> it = blockData.iterator();
         while(it.hasNext())
         {
             BlockData bd = it.next();
             if(bd.getX() == data.getX()
-                    && bd.getY() == data.getX()
+                    && bd.getY() == data.getY()
                     && bd.getZ() == data.getZ()
                     && bd.getWorldName().equals(data.getWorldName()))
             {
