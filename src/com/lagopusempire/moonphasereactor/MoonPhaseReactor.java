@@ -28,7 +28,7 @@ public class MoonPhaseReactor extends JavaPlugin
         
         getCommand("mpblock").setExecutor(new MpBlockCommand(metadataUtils));
         
-        getServer().getPluginManager().registerEvents(new BlockClickListener(metadataUtils, getDatabase(), blockManager), this);
+        getServer().getPluginManager().registerEvents(new BlockClickListener(metadataUtils, getDatabase(), blockManager, this), this);
     }
     
     private void setupDatabase()
@@ -47,7 +47,7 @@ public class MoonPhaseReactor extends JavaPlugin
     @Override
     public List<Class<?>> getDatabaseClasses()
     {
-        List<Class<?>> list = new ArrayList<Class<?>>();
+        List<Class<?>> list = new ArrayList<>();
         list.add(BlockData.class);
         return list;
     }

@@ -59,7 +59,6 @@ public enum MoonPhase
         //phase == 0 -> full moon
         switch(phase)
         {
-            
             case 0:
                 return FULL_MOON;
             case 1:
